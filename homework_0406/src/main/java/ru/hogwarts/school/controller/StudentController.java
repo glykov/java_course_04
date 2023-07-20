@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+import liquibase.pro.packaged.S;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
@@ -107,5 +108,14 @@ public class StudentController {
     @GetMapping("/names-thread")
     public Collection<String> getThreadedNames() {
         return studentService.getThreadedNames();
+    }
+
+    // Создать еще один эндпоинт и метод в сервисе.
+    // Но теперь вывод имени в консоль вынести в отдельный синхронизированный метод.
+    // И так же запустить печать в консоль первых двух имен в основном потоке, третьего и четвертого в параллельном потоке,
+    // четвертого и пятого во втором параллельном потоке.
+    @GetMapping("/manes-sync")
+    public Collection<String> getThreadedNamesSync() {
+        return studentService.getThreadedNamesSync();
     }
 }
